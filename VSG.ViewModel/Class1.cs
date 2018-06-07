@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VSG.Translator
+namespace VSG.ViewModel
 {
     public class Class1
     {
