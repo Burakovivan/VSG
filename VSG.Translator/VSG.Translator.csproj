@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,7 +42,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="EffectService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VSG.Assembler\VSG.Assembler.csproj">
+      <Project>{47261f1d-e759-4bd2-b388-6bd75ba38cf4}</Project>
+      <Name>VSG.Assembler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VSG.ViewModel\VSG.ViewModel.csproj">
+      <Project>{52FCBCBF-5D3A-4E36-AE45-BBAE56092293}</Project>
+      <Name>VSG.ViewModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

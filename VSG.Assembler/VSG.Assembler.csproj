@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ScriptPortal.Vegas, Version=15.0.0.216, Culture=neutral, PublicKeyToken=3cda94b1926e6fbc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\VEGAS\VEGAS Pro 15.0\ScriptPortal.Vegas.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,6 +48,13 @@
     <Compile Include="EffectRepository.cs" />
     <Compile Include="FacilitiesRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VegasHandler.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VSG.ViewModel\VSG.ViewModel.csproj">
+      <Project>{52fcbcbf-5d3a-4e36-ae45-bbae56092293}</Project>
+      <Name>VSG.ViewModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
