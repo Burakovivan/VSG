@@ -24,15 +24,11 @@ namespace VSG.App
     /// </summary>
     public partial class MainWindow : Window
     {
-
-        private EffectService EffectService;
-
         public MainWindow()
         {
-            EffectService = new EffectService();
-            InitializeComponent();
             Mapper.Initialize(cfg=> { });
-            var maped = Mapper.Map<EffectTreeViewModel>(EffectService.GetEffectList());
+            InitializeComponent();
+            var maped = EffectTreeViewModel.GetEffectTree();
             effectTree.Items.Add(maped);
         }
 

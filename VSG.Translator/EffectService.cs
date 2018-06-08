@@ -10,9 +10,9 @@ namespace VSG.Translator
 {
     public class EffectService
     {
-        public EffectTreeModel GetEffectList()
+        public EffectTreeModel GetEffectTree()
         {
-            return EffectRepository.GetPlugIns();
+            return EffectRepository.GetPlugInsTree();
         }
         public List<string> GetPlugInsByParentName(string parentName)
         {

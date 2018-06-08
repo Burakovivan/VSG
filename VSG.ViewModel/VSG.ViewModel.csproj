@@ -30,6 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ScriptPortal.Vegas, Version=15.0.0.216, Culture=neutral, PublicKeyToken=3cda94b1926e6fbc, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,8 +41,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EffectModel.cs" />
+    <Compile Include="ElementSelectors\ElementSelector.cs" />
+    <Compile Include="ElementSelectors\Event\EventByLengthSelection.cs" />
+    <Compile Include="ElementSelectors\Event\EventByNameSelector.cs" />
+    <Compile Include="ElementSelectors\Event\EventByStateSeletion.cs" />
+    <Compile Include="ElementSelectors\Event\EventSelector.cs" />
+    <Compile Include="ElementSelectors\Track\TrackByStateSelector.cs" />
+    <Compile Include="ElementSelectors\Track\TrackByNameSelector.cs" />
+    <Compile Include="ElementSelectors\Track\TrackSelector.cs" />
     <Compile Include="EffectTreeViewModel.cs" />
+    <Compile Include="Enums\ElementMediaType.cs" />
+    <Compile Include="Enums\MoveType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScriptSteps\ElementStep.cs" />
+    <Compile Include="ScriptSteps\Event\AddEventStep.cs" />
+    <Compile Include="ScriptSteps\Event\EventStep.cs" />
+    <Compile Include="ScriptSteps\Event\MoveEventStep.cs" />
+    <Compile Include="ScriptSteps\Event\RemoveEventStep.cs" />
+    <Compile Include="ScriptSteps\Event\SetEffectEventStep.cs" />
+    <Compile Include="ScriptSteps\ScriptStep.cs" />
+    <Compile Include="ScriptSteps\Track\AddTrackStep.cs" />
+    <Compile Include="ScriptSteps\Track\RemoveTrackStep.cs" />
+    <Compile Include="ScriptSteps\Track\SetEffectTrackStep.cs" />
+    <Compile Include="ScriptSteps\Track\TrackStep.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

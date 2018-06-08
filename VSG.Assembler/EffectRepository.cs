@@ -21,7 +21,7 @@ namespace VSG.Assembler
         }
 
 
-        public static EffectTreeModel GetPlugIns()
+        public static EffectTreeModel GetPlugInsTree()
         {
             var plugInsTree = new EffectTreeModel();
             var plugInsSB = new StringBuilder();
