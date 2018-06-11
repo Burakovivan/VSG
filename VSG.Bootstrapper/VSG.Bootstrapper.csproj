@@ -40,6 +40,7 @@
     <Reference Include="ScriptPortal.Vegas, Version=15.0.0.216, Culture=neutral, PublicKeyToken=3cda94b1926e6fbc, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -62,7 +63,7 @@
       <Name>VSG.App</Name>
     </ProjectReference>
     <ProjectReference Include="..\VSG.Assembler\VSG.Assembler.csproj">
-      <Project>{47261F1D-E759-4BD2-B388-6BD75BA38CF4}</Project>
+      <Project>{47261f1d-e759-4bd2-b388-6bd75ba38cf4}</Project>
       <Name>VSG.Assembler</Name>
     </ProjectReference>
   </ItemGroup>

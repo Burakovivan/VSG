@@ -1,0 +1,9 @@
+﻿C:\dev\Diploma\Code_part\VegasScriptGenerator\VegasScriptGenerator\VegasScriptGenerator> "C:\Windows\Microsoft.NET\Framework\v4.0.30319\csc.exe" /t:library /utf8output /R:"System.dll" /R:"System.Linq.dll" /R:"VegasScriptGenerator.dll" /R:"ScriptPortal.Vegas.dll" /out:"VegScript.dll" /D:DEBUG /debug+ /optimize- /w:3 /optimize  "EntryPoint.cs"
+
+
+Microsoft (R) Visual C# Compiler version 4.7.2046.0
+for C# 5
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+This compiler is provided as part of the Microsoft (R) .NET Framework, but only supports language versions up to C# 5, which is no longer the latest version. For compilers that support newer versions of the C# programming language, see http://go.microsoft.com/fwlink/?LinkID=533240
+

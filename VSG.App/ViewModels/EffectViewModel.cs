@@ -1,4 +1,4 @@
-﻿namespace VSG.App.ViewModel
+﻿namespace VSG.App.ViewModels
 {
     public class EffectViewModel
     {

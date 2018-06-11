@@ -26,9 +26,9 @@ namespace VSG.Assembler
             var plugInsTree = new EffectTreeModel();
             var plugInsSB = new StringBuilder();
             GetPlugInNodeTree(VegasHandler.Vegas.PlugIns, plugInsTree, plugInsSB);
-
-            System.IO.File.WriteAllText("Effects.txt", plugInsSB.ToString());
-            System.Diagnostics.Process.Start("Effects.txt");
+            plugInsTree = plugInsTree.Items?.FirstOrDefault();
+            //System.IO.File.WriteAllText("Effects.txt", plugInsSB.ToString());
+            //System.Diagnostics.Process.Start("Effects.txt");
 
             return plugInsTree;
         }
@@ -72,7 +72,7 @@ namespace VSG.Assembler
                 var current = new EffectTreeModel
                 {
                     Name = pin.Name,
-                    IsContainer = true
+                    IsContainer = false
                 };
                 plugInsSB.Append($"{new string('\t', deep)}{(pin.Any() ? "+" : "-")} PlugInNode:'{pin.Name}'{Environment.NewLine}");
                 //GetPresets(pin, deep + 1, plugInsList, plugInsSB);
@@ -87,7 +87,7 @@ namespace VSG.Assembler
                 var current = new EffectTreeModel
                 {
                     Name = pin.Name,
-                    IsContainer = false
+                    IsContainer = true
                 };
                 plugInsSB.Append($"{new string('\t', deep)}PlugIn:'{pin.Name}'{Environment.NewLine}");
                 GetPresets(pin, deep + 1, current, plugInsSB);

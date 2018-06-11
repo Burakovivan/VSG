@@ -8,8 +8,8 @@ namespace VSG.ViewModel.Enums
 {
     public enum ElementMediaType
     {
-        Video,
-        Audio,
-        Both
+        None = 0,
+        Video = 1,
+        Audio = 2,
     }
 }

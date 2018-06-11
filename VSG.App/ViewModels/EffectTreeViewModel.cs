@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VSG.Translator;
 
-namespace VSG.App.ViewModel
+namespace VSG.App.ViewModels
 {
     public class EffectTreeViewModel
     {

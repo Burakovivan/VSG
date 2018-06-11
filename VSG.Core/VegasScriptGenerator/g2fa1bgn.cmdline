@@ -1,0 +1,1 @@
+﻿/t:library /utf8output /R:"System.dll" /R:"System.Linq.dll" /R:"VegasScriptGenerator.dll" /R:"ScriptPortal.Vegas.dll" /out:"VegScript.dll" /D:DEBUG /debug+ /optimize- /w:3 /optimize  "EntryPoint.cs"

@@ -7,7 +7,7 @@
     <ProjectGuid>{2E05EF66-CD8A-416D-9D8D-90D3C9C1755C}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>VSG.App</RootNamespace>
-    <AssemblyName>VSG.UserInterface</AssemblyName>
+    <AssemblyName>VSG.App</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -60,7 +60,8 @@
     </ApplicationDefinition>
     <Compile Include="ViewModels\EffectTreeViewModel.cs" />
     <Compile Include="ViewModels\EffectViewModel.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\ElementSelectorViewModel.cs" />
+    <Compile Include="ViewModels\ElementStepViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -102,6 +103,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\VSG.Model\VSG.Model.csproj">
+      <Project>{f564bf30-083d-47d8-aba8-5eb7353e73e9}</Project>
+      <Name>VSG.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VSG.Translator\VSG.Translator.csproj">
       <Project>{8ccc4aa4-a5f9-48e9-bfec-d5c6d4720569}</Project>
       <Name>VSG.Translator</Name>
@@ -110,6 +115,10 @@
       <Project>{52fcbcbf-5d3a-4e36-ae45-bbae56092293}</Project>
       <Name>VSG.ViewModel</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+    <Folder Include="ValueConverters\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

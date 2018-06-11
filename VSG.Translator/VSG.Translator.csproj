@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>VSG.Translator</RootNamespace>
-    <AssemblyName>VSG</AssemblyName>
+    <AssemblyName>VSG.Translator</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,9 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="EffectService.cs" />
+    <Compile Include="HandlerResolvers\HandlerResolver.cs" />
+    <Compile Include="OptionGetter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RenderStarter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VSG.Assembler\VSG.Assembler.csproj">
