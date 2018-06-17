@@ -11,20 +11,12 @@ public class EntryPoint
         {
             VSG.MainContainer.Vegas = vegas;
             vegas.UnloadScriptDomainOnScriptExit = true;
-            RemoveElementService.RemoveElement(new VSG.ViewModel.ElementSteps.RemoveStep(
-                new ElementSelector
-                {
-                    ElementMediaType = VSG.ViewModel.Enums.ElementMediaType.Audio,
-                    ElementType = VSG.ViewModel.Enums.ElementType.Event,
-                    SelectorType = VSG.ViewModel.Enums.SelectorType.ByName,
-                    Name = "21"
-                }
-            ));
-
+##CODE##
         }
         catch(Exception ex)
         {
             System.Windows.Forms.MessageBox.Show(ex.Message, "Error: " + ex.GetType().Name);
+            System.Windows.Forms.MessageBox.Show(ex.StackTrace, "Error: " + ex.GetType().Name);
         }
 
     }

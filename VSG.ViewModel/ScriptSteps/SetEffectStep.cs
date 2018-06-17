@@ -8,6 +8,9 @@ namespace VSG.ViewModel.ElementSteps
 {
     public class SetEffectStep : ElementStep
     {
-        public EffectModel Effect { get; set; }
+        public SetEffectStep()
+        {
+            DataPropertyList = new Dictionary<string, DataProperty>();
+        }
     }
 }

@@ -5,9 +5,10 @@ using System.Linq;
 using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
-using VSG.Model.Enums;
+using VSG.ViewModel.Attributes;
+using VSG.ViewModel.Enums;
 
-namespace VegasScriptGenerator.Effects.Getters
+namespace VSG.Effects.Getters
 {
 
     public static class EffectsGetter
@@ -26,7 +27,6 @@ namespace VegasScriptGenerator.Effects.Getters
             return plugInsList;
         }
 
-        [VSGMethodType(MethodType = MethodType.Getter)]
         public static PlugInNode GetPlugIn(string plugInName)
         {
             var pin = vegas.PlugIns.GetChildByName(plugInName);

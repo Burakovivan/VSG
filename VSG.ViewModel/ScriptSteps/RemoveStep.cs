@@ -9,5 +9,9 @@ namespace VSG.ViewModel.ElementSteps
 {
     public class RemoveStep : ElementStep
     {
+        public RemoveStep(ElementSelector elementSelector)
+        {
+            Selector = elementSelector;
+        }
     }
 }

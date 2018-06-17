@@ -139,8 +139,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums\MethodType.cs" />
-    <Compile Include="Attributes\VSGMethodType.cs" />
     <Compile Include="Model\VegasCodeBody.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TranslatorResource.Designer.cs">

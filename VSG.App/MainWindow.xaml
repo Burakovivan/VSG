@@ -32,11 +32,12 @@
                 <GridView>
                     <GridViewColumn Header="type" Width="100" DisplayMemberBinding="{Binding TypeDescription}"/>
                     <GridViewColumn Header="selector" Width="100" DisplayMemberBinding="{Binding SelectorDescription}"/>
-                    <GridViewColumn Header="selector" Width="100" DisplayMemberBinding="{Binding DataDescription}"/>
+                    <GridViewColumn Header="data" Width="100" DisplayMemberBinding="{Binding DataDescription}"/>
+                   
                 </GridView> 
             </ListView.View>
         </ListView>
-        <Button Grid.Row="5" Grid.Column="0" Margin="5" Content="Compile scritp" Click="Button_Click"/>
+        <Button Grid.Row="5" Grid.Column="0" Margin="5" Content="Compile scritp" Name="RenderButton" Click="RenderButton_Click"/>
         <Label Margin="5"  VerticalAlignment="Top" Grid.Row="2" Name="SelectorDescriptionLabel" HorizontalContentAlignment="Center" Grid.Column="1" Grid.ColumnSpan="1" Grid.RowSpan="1" />
         <TextBox Grid.Row="2" Grid.Column="2"  Grid.ColumnSpan="2" Margin="8" Name="ElementName" Visibility="Hidden"/>
         <Label Margin="5"  VerticalAlignment="Top" Name="ActionTypeLabel" Visibility="Hidden" Grid.Row="3" Content="Choose Action"  HorizontalContentAlignment="Center" Grid.Column="1" Grid.ColumnSpan="1" Grid.RowSpan="1" />

@@ -1,8 +1,7 @@
 ﻿using ScriptPortal.Vegas;
 using System;
-using VSG.Model.Enums;
 
-namespace VegasScriptGenerator.Extensions
+namespace VSG.Extensions
 {
     public static class TimelineExtensions
     {
@@ -13,7 +12,6 @@ namespace VegasScriptGenerator.Extensions
             vegas.Project.ForEachEvent((tEvent) => tEvent.Selected = false);
         }
 
-        [VSGMethodType(MethodType = MethodType.Modificator)]
         public static void ForEachEvent(this Project proj, Action<TrackEvent> action)
         {
             foreach (var track in proj.Tracks)
@@ -25,7 +23,6 @@ namespace VegasScriptGenerator.Extensions
             }
         }
 
-        [VSGMethodType(MethodType = MethodType.Modificator)]
         public static void ForEachTrack(this Project proj, Action<Track> action)
         {
             foreach (var track in proj.Tracks)

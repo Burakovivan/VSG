@@ -32,7 +32,6 @@
   <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="ScriptPortal.Vegas, Version=15.0.0.216, Culture=neutral, PublicKeyToken=3cda94b1926e6fbc, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows" />
@@ -46,13 +45,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionHandlers\ActionStepHandler.cs" />
-    <Compile Include="ActionHandlers\AddTrackActionStepHandler.cs" />
+    <Compile Include="Attributes\VSGMethodType.cs" />
+    <Compile Include="DataProperty.cs" />
+    <Compile Include="DataPropertyHolder.cs" />
     <Compile Include="EffectModel.cs" />
     <Compile Include="EffectTreeViewModel.cs" />
     <Compile Include="ElementSelector.cs" />
     <Compile Include="Enums\ElementMediaType.cs" />
     <Compile Include="Enums\ElementType.cs" />
     <Compile Include="Enums\EventAction.cs" />
+    <Compile Include="Enums\MethodAction.cs" />
     <Compile Include="Enums\MoveType.cs" />
     <Compile Include="Enums\SelectorType.cs" />
     <Compile Include="Enums\TrackAction.cs" />
@@ -64,6 +66,8 @@
     <Compile Include="ScriptSteps\RemoveStep.cs" />
     <Compile Include="ScriptSteps\SetEffectStep.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

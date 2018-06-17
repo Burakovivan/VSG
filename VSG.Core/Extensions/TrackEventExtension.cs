@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VegasScriptGenerator.Extensions
+namespace VSG.Extensions
 {
     internal static class TrackEventExtension
     {

@@ -103,10 +103,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\VSG.Model\VSG.Model.csproj">
-      <Project>{f564bf30-083d-47d8-aba8-5eb7353e73e9}</Project>
-      <Name>VSG.Model</Name>
-    </ProjectReference>
     <ProjectReference Include="..\VSG.Translator\VSG.Translator.csproj">
       <Project>{8ccc4aa4-a5f9-48e9-bfec-d5c6d4720569}</Project>
       <Name>VSG.Translator</Name>

@@ -2,7 +2,7 @@
 using System.Linq;
 using ScriptPortal.Vegas;
 
-namespace VegasScriptGenerator.Selectors
+namespace VSG.Selectors
 {
     public class TrackSelector
     {

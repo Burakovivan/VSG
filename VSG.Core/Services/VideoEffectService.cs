@@ -4,12 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ScriptPortal.Vegas;
+using VSG.ViewModel;
+using VSG.ViewModel.Enums;
+using VSG.ViewModel.ElementSteps;
+using VSG.ViewModel.Attributes;
 
-namespace VegasScriptGenerator.Effects.Services
+namespace VSG.Effects.Services
 {
-    public class VideoEffectService : IEffectService<VideoEvent>
+    public class VideoEffectService
     {
-        public VideoEvent AddEffect(VideoEvent videoEvent, string effectName, string preset = null)
+        [VSGMethodActionType(MethodAction = MethodAction.Add)]
+        public void AddEffect(ElementStep elementStep, EffectModel effectModel){
+
+            if(elementStep.Selector.ElementType == ElementType.Event)
+            {
+                
+            }
+        }
+
+        private  VideoEvent AddEffect(VideoEvent videoEvent, string effectName, string preset = null)
         {
 
             var pin = Getters.EffectsGetter.GetPlugIn(effectName);
@@ -21,13 +34,13 @@ namespace VegasScriptGenerator.Effects.Services
         {
 
             videoEvent.Effects.Add(effect);
-            if (!string.IsNullOrEmpty(preset) && effect.PlugIn.Presets.Select(p => p.Name).Contains(preset))
+            if(!string.IsNullOrEmpty(preset) && effect.PlugIn.Presets.Select(p => p.Name).Contains(preset))
             {
                 effect.Preset = preset;
             }
             else
             {
-                System.Windows.Forms.MessageBox.Show($"Effect {effect.PlugIn.Name} does not have '{preset?? preset : ''}' preset. Will be used Default.", "Warning");
+                System.Windows.Forms.MessageBox.Show($"Effect {effect.PlugIn.Name} does not have '{preset ?? preset: ''}' preset. Will be used Default.", "Warning");
             }
             return videoEvent;
         }
@@ -35,7 +48,7 @@ namespace VegasScriptGenerator.Effects.Services
         public void RemoveEffect(VideoEvent tEvent, string effectName)
         {
             var effect = tEvent.Effects.SingleOrDefault(e => e.PlugIn.Name == effectName);
-            if (effect != null)
+            if(effect != null)
                 RemoveEffect(tEvent, effect);
         }
 

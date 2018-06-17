@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSG.Bootstrapper", "VSG.Boo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSG.Core", "VSG.Core\VSG.Core.csproj", "{4E4E8609-75E2-4FB0-9677-5D93957573A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSG.Model", "VSG.Model\VSG.Model.csproj", "{F564BF30-083D-47D8-ABA8-5EB7353E73E9}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,10 +45,6 @@ Global
 		{4E4E8609-75E2-4FB0-9677-5D93957573A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E4E8609-75E2-4FB0-9677-5D93957573A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E4E8609-75E2-4FB0-9677-5D93957573A4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F564BF30-083D-47D8-ABA8-5EB7353E73E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F564BF30-083D-47D8-ABA8-5EB7353E73E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F564BF30-083D-47D8-ABA8-5EB7353E73E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F564BF30-083D-47D8-ABA8-5EB7353E73E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

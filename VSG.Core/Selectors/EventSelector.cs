@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VegasScriptGenerator.Selectors
+namespace VSG.Selectors
 {
     public static class TrackEventSelector
     {

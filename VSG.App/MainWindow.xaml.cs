@@ -20,11 +20,9 @@ using VSG.ViewModel.ActionHandlers;
 using VSG.ViewModel.OptionsGetter;
 using VSG.ViewModel.ElementSteps;
 using VSG.ViewModel.Enums;
-using VSG.Model.Model;
 using VSG.ViewModel;
 using System.Runtime.CompilerServices;
 using System.ComponentModel;
-using VSG.Translator.HandlerResolvers;
 
 namespace VSG.App
 {
@@ -41,16 +39,16 @@ namespace VSG.App
         public ElementSelector CurrentSelector { get; set; }
         public string CurrentSelecorDescription { get => _currentSelecorDescription; set { _currentSelecorDescription = value; SelectorDescriptionLabel.Content = _currentSelecorDescription; } }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+     
         public MainWindow()
         {
             Mapper.Initialize(cfg =>
             {
-
+                cfg.CreateMap<ElementStep, ElementStepViewModel>()
+                .ForMember(
+                x => x.Data,
+                opt => opt.MapFrom(z => z.DataPropertyList)
+                    );
             });
 
             ElementStepList = new ObservableCollection<ElementStep>();
@@ -85,6 +83,8 @@ namespace VSG.App
             if(MediaType.IsEnabled)
             {
                 SetupComboboxWithOptions(MediaType, OptionGetter.GetElementMediaTypeOptionList());
+            }else{
+                MediaType.SelectedIndex = 0;
             }
         }
 
@@ -95,6 +95,10 @@ namespace VSG.App
             {
 
                 SetupComboboxWithOptions(SelectorType, OptionGetter.GetSelectorTypeOptionList());
+            }
+            else
+            {
+                SelectorType.SelectedIndex = 0;
             }
         }
 
@@ -110,11 +114,13 @@ namespace VSG.App
                 };
                 ElementName.Visibility = CurrentSelector.SelectorType == ViewModel.Enums.SelectorType.ByName ? Visibility.Visible : Visibility.Hidden;
                 CurrentSelecorDescription = $"{CurrentSelector.ElementMediaType}{CurrentSelector.ElementType} {CurrentSelector.SelectorType}";
+                CurrentSelecorDescription += CurrentSelector.SelectorType == ViewModel.Enums.SelectorType.ByName ? $"\"{CurrentSelector.Name}\"":"";
             }
             else
             {
                 CurrentSelector = null;
                 CurrentSelecorDescription = "Selector not valid";
+                ElementName.Visibility = Visibility.Hidden;
             }
 
             ActionTypeLabel.Visibility = CurrentSelector != null ? Visibility.Visible : Visibility.Hidden;
@@ -125,21 +131,33 @@ namespace VSG.App
         {
             ElementStepList.Add(CurrentActionStepHandler.ElementStep);
             ElementStepVMList.Add(Mapper.Map<ElementStepViewModel>(CurrentActionStepHandler.ElementStep));
+            ElementType.SelectedIndex = 0;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
 
         private void ApplySelectorBtn_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
+        private void ReInitGrig(Grid grid)
+        {
+            ActionContent.RowDefinitions.Clear();
+            ActionContent.ColumnDefinitions.Clear();
+            ActionContent.Children.Clear();
+        }
+
         private void ActionType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var handler = HandlerResolve.GetActionStepHandler(CurrentSelector, (int)ActionType.SelectedValue);
+            if(ActionType.SelectedValue == null || ActionType.SelectedIndex == 0)
+            {
+                ReInitGrig(ActionContent);
+                return;
+            }
+            CurrentSelector.Name = ElementName.Text;
+            CurrentActionStepHandler = new ActionStepHandler(CurrentSelector, (int)ActionType.SelectedValue);
+            CurrentActionStepHandler.HandleAction(ActionContent, ApplyClick);
         }
 
         private void ActionType_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -148,6 +166,17 @@ namespace VSG.App
             {
                 SetupComboboxWithOptions(ActionType, OptionGetter.GetActionOptionList(CurrentSelector.ElementType));
             }
+            else
+            {
+                ReInitGrig(ActionContent);
+            }
         }
+
+        private void RenderButton_Click(object sender, RoutedEventArgs e)
+        {
+            Renderer.StartRender(ElementStepList.ToList());
+        }
+
+
     }
 }

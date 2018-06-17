@@ -1,5 +1,4 @@
-﻿using ScriptPortal.Vegas;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +9,9 @@ namespace VSG.ViewModel.ElementSteps
 {
     public class MoveStep : ElementStep
     {
-        public MoveType MoveType { get; set; }
-        public Timecode Timecode { get; set; }
+        public MoveStep()
+        {
+            DataPropertyList = new Dictionary<string, DataProperty>();
+        }
     }
 }
