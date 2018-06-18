@@ -39,15 +39,15 @@ namespace VSG.App
         public ElementSelector CurrentSelector { get; set; }
         public string CurrentSelecorDescription { get => _currentSelecorDescription; set { _currentSelecorDescription = value; SelectorDescriptionLabel.Content = _currentSelecorDescription; } }
 
-     
+
         public MainWindow()
         {
             Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<ElementStep, ElementStepViewModel>()
-                .ForMember(
-                x => x.Data,
-                opt => opt.MapFrom(z => z.DataPropertyList)
+               .ForMember(
+                x => x.ElementStep,
+                opt => opt.MapFrom(z => z)
                     );
             });
 
@@ -83,7 +83,9 @@ namespace VSG.App
             if(MediaType.IsEnabled)
             {
                 SetupComboboxWithOptions(MediaType, OptionGetter.GetElementMediaTypeOptionList());
-            }else{
+            }
+            else
+            {
                 MediaType.SelectedIndex = 0;
             }
         }
@@ -114,7 +116,7 @@ namespace VSG.App
                 };
                 ElementName.Visibility = CurrentSelector.SelectorType == ViewModel.Enums.SelectorType.ByName ? Visibility.Visible : Visibility.Hidden;
                 CurrentSelecorDescription = $"{CurrentSelector.ElementMediaType}{CurrentSelector.ElementType} {CurrentSelector.SelectorType}";
-                CurrentSelecorDescription += CurrentSelector.SelectorType == ViewModel.Enums.SelectorType.ByName ? $"\"{CurrentSelector.Name}\"":"";
+                CurrentSelecorDescription += CurrentSelector.SelectorType == ViewModel.Enums.SelectorType.ByName ? $"\"{CurrentSelector.Name}\"" : "";
             }
             else
             {
@@ -174,9 +176,46 @@ namespace VSG.App
 
         private void RenderButton_Click(object sender, RoutedEventArgs e)
         {
-            Renderer.StartRender(ElementStepList.ToList());
+            var dialog = new FileNameDialog();
+            dialog.ShowDialog();
+
+            Renderer.StartRender(ElementStepList.ToList(), dialog.folderPath, dialog.FileName.Text);
+        }
+
+        private void RemoveButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(StepListControl.SelectedIndex != -1)
+            {
+                ElementStepList.RemoveAt(StepListControl.SelectedIndex);
+                ElementStepVMList.Clear();
+                ElementStepList.ToList().ForEach(x => ElementStepVMList.Add(Mapper.Map<ElementStepViewModel>(x)));
+            }
+        }
+
+        private void UpButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(StepListControl.SelectedIndex > 0 && ElementStepList.Any())
+            {
+                var selected = ElementStepList.ElementAt(StepListControl.SelectedIndex);
+                ElementStepList.Remove(selected);
+                ElementStepList.Insert(StepListControl.SelectedIndex - 1, selected);
+                ElementStepVMList.Clear();
+                ElementStepList.ToList().ForEach(x => ElementStepVMList.Add(Mapper.Map<ElementStepViewModel>(x)));
+            }
         }
 
 
+        private void DownButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(StepListControl.SelectedIndex != -1 && StepListControl.SelectedIndex < ElementStepList.Count - 1 && ElementStepList.Any())
+            {
+                var selected = ElementStepList.ElementAt(StepListControl.SelectedIndex);
+                ElementStepList.Remove(selected);
+                ElementStepList.Insert(StepListControl.SelectedIndex + 1, selected); 
+                ElementStepVMList.Clear();
+                ElementStepList.ToList().ForEach(x => ElementStepVMList.Add(Mapper.Map<ElementStepViewModel>(x)));
+            }
+
+        }
     }
 }

@@ -11,28 +11,29 @@ namespace VSG.ViewModel.ActionHandlers
         public ElementStep ElementStep { get; set; }
         private Dictionary<string, TextBox> TextBoxDict { get; set; }
         private ActionStepHandler() { }
-       
+
         public ActionStepHandler(ElementSelector elementSelector, int actionType)
         {
             TextBoxDict = new Dictionary<string, TextBox>();
-
-            if(actionType == (int)EventAction.Add)
+            var actionTypeValue = (EventAction)actionType;
+            switch(actionTypeValue)
             {
-                ElementStep = new AddStep(elementSelector);
+                case EventAction.Add:
+                    ElementStep = new AddStep(elementSelector);
+                    break;
+                case EventAction.Remove:
+                    ElementStep = new RemoveStep(elementSelector);
+                    break;
+                case EventAction.Move:
+                    if(elementSelector.ElementType == ElementType.Event)
+                    {
+                        ElementStep = new MoveStep(elementSelector);
+                    }
+                    break;
+                case EventAction.SetEffect:
+                    ElementStep = new SetEffectStep (elementSelector);
+                    break;
             }
-            if(actionType == (int)EventAction.Remove)
-            {
-                ElementStep = new RemoveStep(elementSelector);
-            }
-            if(actionType == (int)EventAction.SetEffect)
-            {
-                ElementStep = new SetEffectStep { Selector = elementSelector };
-            }
-            if(actionType == (int)EventAction.Move)
-            {
-                ElementStep = new MoveStep { Selector = elementSelector };
-            }
-
         }
 
 
@@ -42,7 +43,6 @@ namespace VSG.ViewModel.ActionHandlers
             container.ColumnDefinitions.Clear();
             container.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
             container.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-
             int i = 0;
             container.Children.Clear();
             if(ElementStep.DataPropertyList != null)
@@ -58,7 +58,6 @@ namespace VSG.ViewModel.ActionHandlers
                     };
                     label.SetValue(Grid.RowProperty, i);
                     label.SetValue(Grid.ColumnProperty, 0);
-
                     var textBox = new TextBox
                     {
                         Margin = new Thickness(5),
@@ -73,9 +72,7 @@ namespace VSG.ViewModel.ActionHandlers
                     i++;
                 }
             }
-
             container.RowDefinitions.Add(new RowDefinition { Height = new GridLength(32) });
-
             var applyBtn = new Button
             {
                 Content = "Apply",
@@ -85,8 +82,9 @@ namespace VSG.ViewModel.ActionHandlers
             applyBtn.SetValue(Grid.RowProperty, i + 1);
             applyBtn.SetValue(Grid.ColumnProperty, 1);
             container.Children.Add(applyBtn);
-
         }
+
+
         private void ApplyBtn_Click(object sender, RoutedEventArgs e)
         {
             foreach(var element in TextBoxDict)

@@ -18,7 +18,7 @@ namespace VSG.ViewModel.ElementSteps
                 if(Selector.ElementType == Enums.ElementType.Event)
                 {
                     DataPropertyList = new Dictionary<string, DataProperty>{
-                    {DataPropertyHolder.POSITION, new DataProperty { DisplayName = "Position:" } },
+                    {DataPropertyHolder.TIMECODE, new DataProperty { DisplayName = "Position:" } },
                     {DataPropertyHolder.RESOURCE_NAME, new DataProperty { DisplayName = "Resource name:" } }
                 };
                 }

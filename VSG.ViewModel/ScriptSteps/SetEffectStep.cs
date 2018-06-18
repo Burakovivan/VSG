@@ -8,9 +8,17 @@ namespace VSG.ViewModel.ElementSteps
 {
     public class SetEffectStep : ElementStep
     {
-        public SetEffectStep()
+        public SetEffectStep(ElementSelector selector, Dictionary<string, DataProperty> data = null)
         {
-            DataPropertyList = new Dictionary<string, DataProperty>();
+            Selector = selector;
+            DataPropertyList = data;
+            if(DataPropertyList == null)
+            {
+                DataPropertyList = new Dictionary<string, DataProperty>{
+                    {DataPropertyHolder.EFFECT_NAME, new DataProperty { DisplayName = "Effect Name:" } },
+                    {DataPropertyHolder.EFFECT_PRESET_NAME, new DataProperty { DisplayName = "Preset name:",Value ="" } }
+                };
+            }
         }
     }
 }

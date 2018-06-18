@@ -29,6 +29,14 @@ namespace VSG.Assembler
                 {
                     sb.AppendLine($"{baseT}RemoveElementService.RemoveElement(new {step.GetType().FullName} (");
                 }
+                if(step is MoveStep)
+                {
+                    sb.AppendLine($"{baseT}MoveElementService.MoveElement(new {step.GetType().FullName} (");
+                }
+                if(step is SetEffectStep)
+                {
+                    sb.AppendLine($"{baseT}SetEffectService.SetEffectToElement(new {step.GetType().FullName} (");
+                }
                 sb.AppendLine($"{t}new ElementSelector{{");
                 sb.AppendLine($"{tt}ElementMediaType = {typeof(ElementMediaType)}.{step.Selector.ElementMediaType.ToString()},");
                 sb.AppendLine($"{tt}ElementType = {typeof(ElementType)}.{step.Selector.ElementType.ToString()},");
@@ -54,7 +62,6 @@ namespace VSG.Assembler
                 {
                     sb.AppendLine($"{baseT}));");
                 }
-
             }
             var codeTemplate = TemplateResources.NewVegasCodeTemplate;
             var codePlaceholder = TemplateResources.CodePlaceholder;

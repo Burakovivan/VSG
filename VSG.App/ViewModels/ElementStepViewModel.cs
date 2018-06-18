@@ -1,20 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using VSG.ViewModel;
+using VSG.ViewModel.ElementSteps;
 
 namespace VSG.App.ViewModels
 {
     public class ElementStepViewModel
     {
-        public string TypeDescription { get; set; }
-        public string SelectorDescription { get; set; }
-        public Dictionary<string, DataProperty> Data { get; set; }
-        public string DataDescription
-        {
-            get
-            {
-                return "{" + string.Join(";", Data.Select(x => x.Value.DisplayName + " = " + x.Value.Value)) + "}";
-            }
-        }
+        public ElementStep ElementStep { get; set; }
+
+        public string TypeDescription => ElementStep.GetType().Name;
+        public string SelectorDescription => $"{ElementStep.Selector.ElementMediaType}{ElementStep.Selector.ElementType} {ElementStep.Selector.SelectorType} {(string.IsNullOrEmpty(ElementStep.Selector.Name)?"":$"'{ElementStep.Selector.Name}'")}";
+        public string DataDescription => "{" + string.Join(";", ElementStep.DataPropertyList.Select(x => x.Value.DisplayName + " = " + x.Value.Value)) + "}";
     }
 }

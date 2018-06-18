@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using VSG.Core.Services;
 using VSG.ViewModel;
@@ -23,28 +24,46 @@ namespace VSG.Core.Services
 
             if(elementStep.Selector.ElementType == ElementType.Event)
             {
-                var track = SelectorService.GetTrack(new ViewModel.ElementSelector { SelectorType = SelectorType.BySelection });
-                var media = MainContainer.Vegas.Project.MediaPool.Cast<Media>().FirstOrDefault(x => Path.GetFileName(x.FilePath) == elementStep.DataPropertyList[DataPropertyHolder.RESOURCE_NAME].Value);
-                TrackEvent trackEvent = null;
-                if(elementStep.Selector.IsAudio())
+                Track track = SelectorService.GetTrack(elementStep.Selector);
+                var trackRegEx = new Regex(elementStep.DataPropertyList[DataPropertyHolder.RESOURCE_NAME].Value);
+                Media media = MainContainer.Vegas.Project.MediaPool.Cast<Media>().FirstOrDefault(x =>
+                    trackRegEx.IsMatch(Path.GetFileName(x.FilePath)));
+                if(elementStep.Selector.IsAudio() && media.Streams.Any(x => x.MediaType == MediaType.Audio))
                 {
-                    trackEvent = new AudioEvent(
-                    Timecode.FromString(elementStep.DataPropertyList[DataPropertyHolder.POSITION].Value),
+                    TrackEvent trackEvent = new AudioEvent(
+                    Timecode.FromString(elementStep.DataPropertyList[DataPropertyHolder.TIMECODE].Value),
                     media.Length,
                     elementStep.DataPropertyList[DataPropertyHolder.RESOURCE_NAME].Value);
+                    track.Events.Add(trackEvent);
+                    trackEvent.AddTake(media.Streams[0], true, elementStep.DataPropertyList[DataPropertyHolder.RESOURCE_NAME].Value);
                 }
-                if(elementStep.Selector.IsVideo())
+                if(elementStep.Selector.IsVideo() && media.Streams.Any(x => x.MediaType == MediaType.Video))
                 {
-                    trackEvent = new VideoEvent(Timecode.FromString(elementStep.DataPropertyList[DataPropertyHolder.POSITION].Value),
+                    TrackEvent trackEvent = new VideoEvent(Timecode.FromString(elementStep.DataPropertyList[DataPropertyHolder.TIMECODE].Value),
                     media.Length,
                     elementStep.DataPropertyList[DataPropertyHolder.RESOURCE_NAME].Value);
+                    if(media.Streams.Any(x => x.MediaType == MediaType.Audio))
+                    {
+                        elementStep.Selector.ElementMediaType = ElementMediaType.Audio;
+                        AudioTrack syncAudioTrack = SelectorService.GetTrack(elementStep.Selector) as AudioTrack;
+                        MediaStream audioStream = media.Streams.FirstOrDefault(x => x.MediaType == MediaType.Audio);
+                        MediaStream videoStream = media.Streams.FirstOrDefault(x => x.MediaType == MediaType.Video);
+                        var audioEvent = new AudioEvent(
+                            Timecode.FromString(elementStep.DataPropertyList[DataPropertyHolder.TIMECODE].Value),
+                            media.Length,
+                            elementStep.DataPropertyList[DataPropertyHolder.RESOURCE_NAME].Value);
+                        track.Events.Add(trackEvent);
+                        trackEvent.AddTake(videoStream, true, elementStep.DataPropertyList[DataPropertyHolder.RESOURCE_NAME].Value);
+                        syncAudioTrack.Events.Add(audioEvent);
+                        audioEvent.AddTake(audioStream, true, elementStep.DataPropertyList[DataPropertyHolder.RESOURCE_NAME].Value);
+                    }
+                    else
+                    {
+                        track.Events.Add(trackEvent);
+                        trackEvent.AddTake(media.Streams[0], true, elementStep.DataPropertyList[DataPropertyHolder.RESOURCE_NAME].Value);
+                    }
                 }
-                if(trackEvent == null)
-                {
-                    return;
-                }
-                track.Events.Add(trackEvent);
-                trackEvent.AddTake(media.Streams[0], true, elementStep.DataPropertyList[DataPropertyHolder.RESOURCE_NAME].Value);
+
             }
             if(elementStep.Selector.ElementType == ElementType.Track)
             {

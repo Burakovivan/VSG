@@ -9,9 +9,20 @@ namespace VSG.ViewModel.ElementSteps
 {
     public class MoveStep : ElementStep
     {
-        public MoveStep()
+        public MoveStep(ElementSelector selector, Dictionary<string, DataProperty> data = null)
         {
-            DataPropertyList = new Dictionary<string, DataProperty>();
+
+            Selector = selector;
+            DataPropertyList = data;
+            if(DataPropertyList == null)
+            {
+                if(Selector.ElementType == Enums.ElementType.Event)
+                {
+                    DataPropertyList = new Dictionary<string, DataProperty>{
+                        {DataPropertyHolder.TIMECODE, new DataProperty { DisplayName = "Postion :" } },
+                    };
+                }
+            }
         }
     }
 }

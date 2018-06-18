@@ -20,10 +20,9 @@ namespace VSG.Core.Services
             {
                 return;
             }
-
             if(elementStep.Selector.ElementType == ElementType.Event)
             {
-                var eventToRemove = MainContainer.Vegas.Project.Tracks.SelectMany(x => x.Events).FirstOrDefault(x => x.IsAudio() == elementStep.Selector.IsAudio() && x.ActiveTake.Name == elementStep.Selector.Name);
+                TrackEvent eventToRemove = SelectorService.GetEvent(elementStep.Selector);
                 if(eventToRemove != null)
                 {
                     eventToRemove.Track.Events.Remove(eventToRemove);
@@ -31,8 +30,8 @@ namespace VSG.Core.Services
             }
             if(elementStep.Selector.ElementType == ElementType.Track)
             {
-                var track = new Selectors.TrackSelector().GetTrackByName(elementStep.Selector.Name);
-                MainContainer.Vegas.Project.Tracks.Remove(track);
+                Track track = SelectorService.GetTrack(elementStep.Selector);
+                track.Project.Tracks.Remove(track);
             }
         }
     }
